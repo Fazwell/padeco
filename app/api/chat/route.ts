@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
           ...messages,
         ],
         temperature: 0.7,
-        max_tokens: 512,
+        max_tokens: 512, 
       }),
     });
 
