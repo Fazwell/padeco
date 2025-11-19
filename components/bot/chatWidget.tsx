@@ -265,7 +265,7 @@ export default function ChatWidget() {
                 size="icon"
                 className="h-12 w-12 rounded-xl bg-highlight hover:bg-highlight/90 text-background disabled:opacity-50 shrink-0"
               >
-                <PaperAirplaneIcon className="h-5 w-5 rotate-90" />
+                <PaperAirplaneIcon className="h-5 w-5 rotate-360" />
               </Button>
             </div>
           </div>
