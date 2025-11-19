@@ -35,58 +35,55 @@ export default function ChatWidget() {
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
-        {
-          id: prev.length + 1,
-          text: "Thanks! We'll get back to you shortly.",
-          sender: "bot",
-        },
+        { id: prev.length + 1, text: "Thanks! We'll reply shortly.", sender: "bot" },
       ]);
     }, 800);
   };
 
   return (
     <>
-      {/* Floating Trigger – only opens, no close */}
+      {/* Floating Button – perfect on mobile & desktop */}
       <Button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-highlight p-0 text-background shadow-2xl transition-all hover:scale-110 hover:bg-highlight/90"
+        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-highlight p-0 text-background shadow-2xl transition-all hover:scale-110 hover:bg-highlight/90 md:bottom-8 md:right-8"
         size="icon"
         aria-label="Open chat"
       >
         <ChatBubbleLeftRightIcon className="h-8 w-8" />
       </Button>
 
-      {/* Chat Sheet – ONLY ONE close button (top-right X) */}
+      {/* Responsive Chat Sheet */}
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" className="w-96 flex flex-col p-0 sm:max-w-md">
-          {/* Header with single X */}
-          <SheetHeader className="border-b border-border/40 bg-background px-5 py-4">
+        <SheetContent
+          side="right"
+          className="flex h-full flex-col p-0 sm:max-w-md w-full sm:w-96"
+        >
+          {/* Header */}
+          <SheetHeader className="border-b border-border/40 bg-background px-4 py-4 sm:px-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-highlight">
-                  <span className="font-bold text-background">P</span>
+                  <span className="font-bold text-background text-lg">P</span>
                 </div>
                 <div>
                   <SheetTitle className="text-lg">PADECO Assistant</SheetTitle>
-                  <p className="text-xs text-foreground/60">Online — replies instantly</p>
+                  <p className="text-xs text-foreground/60">Online — instant replies</p>
                 </div>
               </div>
-
-              {/* ← THIS IS THE ONLY CLOSE BUTTON */}
-           
+        
             </div>
           </SheetHeader>
 
-          {/* Messages */}
-          <ScrollArea className="flex-1 px-5 py-4">
-            <div className="space-y-4">
+          {/* Messages – perfect spacing & readability */}
+          <ScrollArea className="flex-1 px-4 py-4 sm:px-6">
+            <div className="space-y-4 pb-20 sm:pb-4">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
                   className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
+                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm sm:max-w-[75%] ${
                       msg.sender === "user"
                         ? "bg-highlight text-background"
                         : "bg-muted text-foreground"
@@ -99,14 +96,14 @@ export default function ChatWidget() {
             </div>
           </ScrollArea>
 
-          {/* Input */}
-          <div className="border-t border-border/40 bg-background p-4">
-            <div className="flex gap-2">
+          {/* Input – perfectly aligned send button */}
+          <div className="border-t border-border/40 bg-background p-4 sm:p-5">
+            <div className="flex gap-3 items-end">
               <Textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your message..."
-                className="min-h-12 resize-none border-border"
+                className="min-h-12 max-h-32 resize-none flex-1 border-border focus-visible:ring-highlight/50"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
@@ -116,10 +113,12 @@ export default function ChatWidget() {
               />
               <Button
                 onClick={sendMessage}
+                disabled={!input.trim()}
                 size="icon"
-                className="bg-highlight hover:bg-highlight/90 text-background"
+                className="h-12 w-12 rounded-xl bg-highlight hover:bg-highlight/90 text-background disabled:opacity-50 disabled:cursor-not-allowed transition-all shrink-0"
               >
-                <PaperAirplaneIcon className="h-5 w-5 rotate-90" />
+                <PaperAirplaneIcon className="h-5 w-5 rotate-360" />
+                <span className="sr-only">Send</span>
               </Button>
             </div>
           </div>
