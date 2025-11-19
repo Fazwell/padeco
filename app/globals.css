@@ -1,26 +1,133 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Dark mode detection */
+@custom-variant dark (&:is(.dark *));
 
+/* Make Tailwind understand your semantic colors */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-highlight: var(--highlight);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ────────────────────────────────────────────── */
+/*               YOUR CUSTOM THEME               */
+/* ────────────────────────────────────────────── */
+
+:root {
+  /* Base radius */
+  --radius: 0.625rem;
+
+  /* Your exact brand colors (converted to OKLCH for perfect perceptual smoothness) */
+  --background: oklch(23% 0.015 170);   /* ≈ rgb(23, 52, 45)  → very dark green */
+  --foreground: oklch(98% 0.005 90);    /* ≈ rgb(255,255,255) → almost pure white */
+  --highlight:  oklch(85% 0.18 90);     /* ≈ rgb(249, 206, 81) → bright yellow */
+
+  /* Semantic mapping for shadcn/ui */
+  --card:               var(--background);
+  --card-foreground:    var(--foreground);
+
+  --popover:            var(--background);
+  --popover-foreground: var(--foreground);
+
+  /* Primary = your yellow highlight */
+  --primary:            var(--highlight);
+  --primary-foreground: oklch(20% 0.015 170);   /* dark green text on yellow */
+
+  --secondary:          oklch(30% 0.02 170);
+  --secondary-foreground: var(--foreground);
+
+  --muted:              oklch(28% 0.02 170);
+  --muted-foreground:   oklch(70% 0.02 170);
+
+  --accent:             oklch(40% 0.08 90);     /* slightly muted yellow */
+  --accent-foreground:  oklch(20% 0.015 170);
+
+  --destructive:        oklch(65% 0.25 28);
+  --destructive-foreground: oklch(98% 0 0);
+
+  --border:             oklch(40% 0.03 170 / 50%);
+  --input:              oklch(40% 0.03 170 / 60%);
+  --ring:               var(--highlight);
+
+  /* Optional chart colors (you can tweak later) */
+  --chart-1: oklch(80% 0.20 90);
+  --chart-2: oklch(70% 0.18 130);
+  --chart-3: oklch(60% 0.16 200);
+  --chart-4: oklch(75% 0.15 60);
+  --chart-5: var(--highlight);
+
+  /* Sidebar (if you use shadcn sidebar) */
+  --sidebar:                    var(--background);
+  --sidebar-foreground:         var(--foreground);
+  --sidebar-primary:            var(--highlight);
+  --sidebar-primary-foreground: oklch(20% 0.015 170);
+  --sidebar-accent:             oklch(35% 0.05 170);
+  --sidebar-accent-foreground:  var(--foreground);
+  --sidebar-border:             var(--border);
+  --sidebar-ring:               var(--ring);
+}
+
+/* Dark mode – just a slightly lighter background so it’s not pure black */
+.dark {
+  --background: oklch(19% 0.015 170);   /* a touch lighter than light mode bg */
+  --foreground: oklch(96% 0.005 90);
+
+  --card:               var(--background);
+  --card-foreground:    var(--foreground);
+  --popover:            var(--background);
+  --popover-foreground: var(--foreground);
+
+  --primary:            var(--highlight);
+  --primary-foreground: oklch(18% 0.015 170);
+
+  --secondary:          oklch(26% 0.02 170);
+  --secondary-foreground: var(--foreground);
+
+  --muted:              oklch(24% 0.02 170);
+  --muted-foreground:   oklch(65% 0.02 170);
+
+  --accent:             oklch(35% 0.06 90);
+  --accent-foreground:  oklch(18% 0.015 170);
+
+  --border:             oklch(40% 0.03 170 / 40%);
+  --input:              oklch(40% 0.03 170 / 50%);
+  --ring:               var(--highlight);
+
+  --sidebar:                    var(--background);
+  --sidebar-foreground:         var(--foreground);
+  --sidebar-primary:            var(--highlight);
+  --sidebar-primary-foreground: oklch(18% 0.015 170);
+  --sidebar-accent:             oklch(30% 0.04 170);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border:             var(--border);
+  --sidebar-ring:               var(--ring);
+}
+
+/* Base styles */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
 }
