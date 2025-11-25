@@ -1,14 +1,5 @@
 // components/common/Footer.tsx
 import Link from "next/link";
-// ← All heroicons imports are commented out for now
-// import {
-//   TwitterLogo,
-//   LinkedinLogo,
-//   GithubLogo,
-//   InstagramLogo,
-//   FacebookLogo,
-//   EnvelopeClosedIcon,
-// } from "@heroicons/react/24/solid";
 
 const navigation = {
   company: [
@@ -28,19 +19,12 @@ const navigation = {
     { name: "Terms of Service", href: "/terms" },
     { name: "Cookie Policy", href: "/cookies" },
   ],
-  // Social icons completely commented out until you need them
-  // social: [
-  //   { name: "X (Twitter)", href: "https://x.com/yourhandle", icon: /* X SVG */ },
-  //   { name: "Instagram", href: "https://instagram.com/yourhandle", icon: InstagramLogo },
-  //   { name: "Facebook", href: "https://facebook.com/yourpage", icon: FacebookLogo },
-  //   { name: "WhatsApp", href: "https://wa.me/1234567890", icon: /* WhatsApp SVG */ },
-  // ],
 };
 
 export default function Footer() {
   return (
     <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container max-w-7xl px-4 py-12 md:py-16">
+      <div className="mx-auto w-full max-w-7xl px-6 md:px-12 lg:px-20 py-12 md:py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-6">
           <div className="col-span-2 md:col-span-4 lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2">
@@ -49,28 +33,8 @@ export default function Footer() {
             <p className="mt-4 max-w-xs text-sm text-foreground/70">
               Building the future with precision, passion, and a touch of yellow.
             </p>
-
-            {/* Social icons section – fully commented out */}
-            {/* <div className="mt-6 flex gap-4">
-              {navigation.social.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex h-10 w-10 items-center justify-center rounded-lg bg-muted/50 transition-all hover:bg-highlight hover:text-background"
-                    aria-label={`Follow us on ${item.name}`}
-                  >
-                    {Icon}
-                  </a>
-                );
-              })}
-            </div> */}
           </div>
 
-          {/* Company, Services, Legal columns – unchanged */}
           <div>
             <h3 className="font-semibold text-foreground">Company</h3>
             <ul className="mt-4 space-y-3">
