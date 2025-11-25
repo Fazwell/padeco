@@ -23,6 +23,12 @@ export default function HomePage() {
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </Button>
+        <Button asChild size="lg" className="px-8">
+          <Link href="/dashboard">
+           Dashboard
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+        </Button>
       </section>
     </>
   )
